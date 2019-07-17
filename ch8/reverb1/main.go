@@ -27,17 +27,17 @@ func main() {
 }
 
 func echo(c net.Conn, shout string, delay time.Duration) {
-	fmt.Fprintln(c, "\t", strings.ToUpper(shout))
+	fmt.Fprintln(c, "\t1. ", strings.ToUpper(shout))
 	time.Sleep(delay)
-	fmt.Fprintln(c, "\t", shout)
+	fmt.Fprintln(c, "\t2. ", shout)
 	time.Sleep(delay)
-	fmt.Fprintln(c, "\t", strings.ToLower(shout))
+	fmt.Fprintln(c, "\t3. ", strings.ToLower(shout))
 }
 
 func handleConn(c net.Conn) {
 	input := bufio.NewScanner(c)
 	for input.Scan() {
-		go echo(c, input.Text(), 1*time.Second)
+		go echo(c, input.Text(), 2*time.Second)
 	}
 	c.Close()
 }
